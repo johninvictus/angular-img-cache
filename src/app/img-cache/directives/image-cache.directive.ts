@@ -15,6 +15,9 @@ export class ImageCacheDirective {
     private renderer: Renderer2,
     private el: ElementRef,
     private cacheService: CacheService) {
+    if (loader) {
+      this.renderer.setAttribute(this.el.nativeElement, 'src', this.loader);
+    }
     if (srcCache) {
       this.checkIfCacheElseAdd(srcCache);
     }
@@ -22,13 +25,13 @@ export class ImageCacheDirective {
 
 
   @HostListener('load') onLoad() {
-    const imageData = this.el.nativeElement.src;
-    console.error(imageData);
-    // this.renderer.setAttribute(this.el.nativeElement, 'src', imageData);
+    // in case you want to listen to any set logs
   }
 
   @HostListener('error') onError() {
-    // this.renderer.setAttribute(this.el.nativeElement, 'src', this.onErrorSrc);
+    if (this.onErrorSrc) {
+      this.loadError();
+    }
   }
 
   private checkIfCacheElseAdd(url): void {
@@ -40,8 +43,15 @@ export class ImageCacheDirective {
       this.cacheService.getUrl(url).subscribe(imgData => {
         this.renderer.setAttribute(this.el.nativeElement, 'src', imgData);
         this.cacheService.put(url, imgData);
+      }, error => {
+        console.error(error);
+        this.loadError();
       });
     }
+  }
+
+  private loadError() {
+    this.renderer.setAttribute(this.el.nativeElement, 'src', this.onErrorSrc);
   }
 
 }
