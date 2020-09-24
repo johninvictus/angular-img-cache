@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "angular-img-cache"
+    }
+  },
+  "defaultProject": "angular-img-cache",
+  "cli": {
+    "analytics": false
+  }
 }
