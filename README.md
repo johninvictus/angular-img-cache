@@ -1,5 +1,26 @@
 # AngularImgCache
 
+
+Once you add the cache module you can use this directive like this,
+
+```
+<img srcCache="https://static.wixstatic.com/media/9d95ec_331689f9f63b4b538509abb1d306ff20~mv2.gif"
+       imageCache onErrorSrc="./assets/not_found.png"
+       width="500px" loader="./assets/tenor.gif">
+```
+
+The only required field are `imageCache` and `srcCache`.
+
+Don't forget to use `srcCache` instead of `src`. You can use add `onErrorSrc` and `loader` field to indicate error and loading states.
+
+
+
+
+
+
+
+# Setup
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
 
 ## Development server
