@@ -1,12 +1,22 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {CacheService} from './services/cache.service';
+import {ImageCacheDirective} from './directives/image-cache.directive';
+import {HttpClientModule} from '@angular/common/http';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [ImageCacheDirective],
   imports: [
-    CommonModule
+    CommonModule,
+    HttpClientModule
+  ],
+  providers: [
+    CacheService,
+  ],
+  exports: [
+    ImageCacheDirective
   ]
 })
-export class ImgCacheModule { }
+export class ImgCacheModule {
+}
